@@ -8,8 +8,8 @@ format:
     email: "wilfried.cools@vub.be"
     website: "square.research.vub.be"
     template-partials:
-      - _extensions/typst-template/typst-show.typ
-      - _extensions/typst-template/typst-template.typ
+      - typst-show.typ
+      - typst-template.typ
 params:
   mypar: "w's parameter in the YAML"
 execute:
