@@ -1,0 +1,104 @@
+---
+title: "Project Title"
+author: "W. Cools"
+date-modified: "last-modified"
+format:
+  typst:
+    logo-path: "_hdr_logo.png"
+    email: "wilfried.cools@vub.be"
+    website: "square.research.vub.be"
+    template-partials:
+      - _extensions/typst-template/typst-show.typ
+      - _extensions/typst-template/typst-template.typ
+params:
+  mypar: "w's parameter in the YAML"
+execute:
+  echo: FALSE
+  message: FALSE
+  warning: FALSE
+---
+
+<!-- Project Title <project label> -->
+
+```{r}
+#| label: identification
+#| echo: false
+prjct <- 'client_name'
+```
+
+```{r}
+#| label: if_qmd_to_r
+#| eval: false
+knitr::purl(paste0(prjct,".qmd"), output = paste0(prjct,".r"))
+source(paste0(prjct,".r"))
+# system(paste0('quarto render ',prjct,'.qmd'))
+```
+
+<!-- RUN:: libraries -->
+```{r}
+#| label: p_funs_intermediate
+#| echo: false
+pckgs <- c('tidyverse')
+donotshow <- purrr::map(pckgs, library, character.only=TRUE)
+```
+
+<!-- RUN:: data -->
+```{r}
+#| label: data_read_rename
+#| eval: false
+mppng <- tribble(~output,~input,
+"new1","old1",
+"new2","old2")
+dta <- dta %>% rename(!!! setNames(mppng$input, mppng$output))
+
+# renaming <- c(new1="old1", new2="old2")
+# dta <- dta |> rename_with(~names(renaming),all_of(as.character(renaming)))
+```
+
+
+> ! Current draft describes work in progress and its content should be treated as such. The researcher should remain skeptical to ensure the analyses are appropriate. 
+
+> running `{r} R.version.string`
+
+<!--
+::: {.callout-note title='Goal'}
+:::
+
+::: {.callout-tip title='Conclusion'}
+:::
+-->
+
+## Data
+
+This template can be used for SQUARE drafts.  
+The _xtra folder contains the square logo and css files for formatting.  
+
+## Analysis
+
+```{r}
+glimpse(mtcars)
+```
+
+## Conclusion
+
+To reach a second page, a few tables are generated.
+
+```{r}
+table(mtcars |> select(vs,cyl))
+```
+
+```{r}
+head(mtcars)
+```
+
+```{r}
+summary(lm(mpg~cyl,data=mtcars))
+```
+
+<!-- end of the line -->
+
+```{r}
+#| label: save_all
+save.image(paste0('Γ_image_',strftime(Sys.time(), format = "%y-%m-%d"),'.RData'))
+```
+ 
